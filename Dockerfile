@@ -47,8 +47,8 @@ RUN mix do deps.get, deps.compile, compile
 # This is mostly here for demonstration purposes
 RUN if [ ! "$SKIP_PHOENIX" = "true" ]; then \
   cd ${PHOENIX_SUBDIR}/assets && \
-  yarn install && \
-  yarn deploy && \
+  npm i && \
+  npm run deploy && \
   cd - && \
   mix phx.digest; \
 fi
