@@ -8,7 +8,7 @@ DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 Green='\033[0;32m'
-Blue='\e[1;34m'
+Blue='\033[0;34m'
 
 help:
 	@echo "$(DOCKER_TAG)"
@@ -43,3 +43,4 @@ release: ## Release
 	$(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG)-$(BUILD))
 	@echo "$(Blue) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
 test:
+	@echo "$(Blue) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
