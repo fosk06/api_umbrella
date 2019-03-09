@@ -1,47 +1,19 @@
-version: '2'
+version: '3.5'
 
 services:
-    postgres:
-        # the image is the last official postgres image
-        image: postgres
-        container_name: postgres
-        # the volumes allow us to have a shared space between our computer and the docker vm
-        volumes:
-            - "./.data/postgres:/var/lib/postgresql"
-         # set up instances env variable
-        env_file: .env
-        # the port to listen
-        ports:
-            - "5432:5432"
-    redis:
-        # the image is the last official redis image of the version 4  
-        image: redis:4.0
-        container_name: redis
-        ports:
-            - "6379:6379"
-        volumes:
-            - ./.data/redis:/var/lib/redis
-        env_file: .env
-    elixir:
-        # build use a path to a Dockerfile
-        container_name: elixir
-        build: .
-        # we set multiple ports as each of our application will use a different port
-        ports:
-            - "4001:4001"
-            - "4002:4002"
-            - "4003:4003"
-            - "4004:4004"
-            - "4101:4101"
-            - "4102:4102"
-            - "4103:4103"
-            - "4104:4104"
-        env_file: .env
-        # we share the entire app with the container, but the libs
-        volumes:
-            - ".:/app"
-            - "/app/deps"
-            - "/app/apps/admin/assets/node_modules"
-        # the container will not start if the postgres container isn't running
-        depends_on:
-            - postgres
+  web:
+    image: api_umbrella:latest
+    depends_on:
+        - db
+    ports:
+        - "4000:4000"
+    env_file:
+        - config/docker.env
+  db:
+    image: postgres:10-alpine
+    volumes:
+        - "~/volumes/postgres:/var/lib/postgresql/data"
+    ports:
+        - "5432:5432"
+    env_file:
+        - config/docker.env

@@ -18,3 +18,8 @@ run: ## Run the app in Docker
 	docker run --env-file config/docker.env \
 		--expose 4000 -p 4000:4000 \
 		--rm -it $(APP_NAME):latest
+		
+run_stack: ## Run the stack
+	docker-compose up -d
+stop_stack: ## Stop the stack
+	docker-compose stop
