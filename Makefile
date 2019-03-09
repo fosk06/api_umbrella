@@ -10,7 +10,7 @@ DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
 Red=\033[0;31m
 NC=\033[0m # No Color
 Green=\033[0;32m
-Blue=\033[0;34m
+Blue=\033[0;36m
 
 help:
 	clear
@@ -46,7 +46,7 @@ release: ## Commit and push the new release
 	$(eval BUILD?=`git rev-parse --short HEAD`)
 	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
 	$(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG)-$(BUILD))
-	@echo "$(Blue) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
+	@echo "$(Blue)DOCKER_TAG: $(DOCKER_TAG)$(NC)"
 
 run_local: ## Get deps, compile and run locally with mix tasks
 	@echo "$(Red) elixir, node.js and phoenix must be installed first !$(NC)"
