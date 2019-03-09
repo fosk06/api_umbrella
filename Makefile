@@ -66,6 +66,7 @@ run_local: ## Get deps, compile and run locally with mix tasks
 	@echo "$(Red) elixir, node.js and phoenix must be installed first !$(NC)"
 	@echo "$(Green) compile and run localy ........................ $(NC)"
 	mix do deps.get, deps.compile, compile, phx.digest, phx.server
+	
 test:
 	export $$(ENV_FILE) && echo "$$DOCKER_REGISTRY"
 	# @echo "$(Blue)$(ENV_FILE)$(NC)"
