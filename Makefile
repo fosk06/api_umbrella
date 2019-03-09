@@ -44,7 +44,7 @@ stop_stack: ## Stop the stack with docker-compose
 	docker-compose stop
 
 tag: ## Create git tag and docker tag, commit and push with the tags
-	@echo "$(Green)Tag step ..........................................$(NC)"
+	@echo "$(Green)Tag step ...........................................$(NC)"
 	git commit -a -m "release $(APP_VSN)"
 	git tag -a $(APP_VSN) -m "release $(APP_VSN)"
 	git push origin master
