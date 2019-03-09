@@ -5,6 +5,8 @@ APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`
 BUILD ?= `git rev-parse --short HEAD`
 GIT_TAG = $(APP_VSN)-$(BUILD)
 DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
+RED='\033[0;31m'
+NC='\033[0m' # No Color
 
 help:
 	@echo "$(DOCKER_TAG)"
@@ -18,7 +20,7 @@ build: release ## Build the Docker image
 		-t $(APP_NAME):latest .
 
 run: build ## run and build image 
-	@echo "run step..................................."
+	@echo -e "${RED}run step..................................."
 	docker run --env-file config/docker.env \
 		--expose 4000 -p 4000:4000 \
 		--rm -it $(APP_NAME):latest
@@ -30,7 +32,7 @@ stop_stack: ## Stop the stack
 	docker-compose stop
 
 release: ## Release
-	@echo "release step..................................."
+	@echo -e "${RED}release step..................................."
 	git commit -a -m "release $(GIT_TAG)"
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
