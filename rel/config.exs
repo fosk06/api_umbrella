@@ -47,7 +47,7 @@ end
 # will be used by default
 
 release :api_umbrella do
-  set version: "1.0.1"
+  set version: "1.0.2"
   set applications: [
     :runtime_tools,
     front: :permanent,

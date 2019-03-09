@@ -42,5 +42,7 @@ release: ## Release
 	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
 	$(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG)-$(BUILD))
 	@echo "$(Blue) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
-test:
+run_local:
 	@echo "$(Blue) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
+	mix do deps.get, deps.compile, compile, phx.digest
+	mix phx.server
