@@ -10,7 +10,7 @@ by adding `greeter` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:greeter, "~> 0.1.0"}
+    {:greeter, "~> 1.0.1"}
   ]
 end
 ```
