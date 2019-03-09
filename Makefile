@@ -5,7 +5,6 @@ APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`
 BUILD ?= `git rev-parse --short HEAD`
 GIT_TAG = $(APP_VSN)-$(BUILD)
 DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
-
 ## color variables 
 Red=\033[0;31m
 NC=\033[0m # No Color
@@ -47,6 +46,12 @@ release: ## Commit and push the new release
 	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
 	$(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG)-$(BUILD))
 	@echo "$(Blue)DOCKER_TAG: $(DOCKER_TAG)$(NC)"
+
+push: ## push to docker registry
+	@echo "$(Green)push step ..........................................$(NC)"
+	export $$(cat .env | grep -v ^\# | xargs) && docker login $$DOCKER_REGISTRY -p $$DOCKER_REGISTRY_PASSWORD -u $$DOCKER_REGISTRY_USERNAME
+	export $$(cat .env | grep -v ^\# | xargs) && docker tag ${DOCKER_TAG} "$$DOCKER_REGISTRY/$$DOCKER_REGISTRY_USERNAME/${DOCKER_TAG}"
+	# export $$(cat .env | grep -v ^\# | xargs) && docker push "$$DOCKER_REGISTRY/$$DOCKER_REGISTRY_USERNAME/${DOCKER_TAG}"
 
 run_local: ## Get deps, compile and run locally with mix tasks
 	@echo "$(Red) elixir, node.js and phoenix must be installed first !$(NC)"
