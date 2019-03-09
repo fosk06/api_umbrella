@@ -6,7 +6,7 @@ BUILD ?= `git rev-parse --short HEAD`
 GIT_TAG = $(APP_VSN)-$(BUILD)
 DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
 
-## color variables
+## color variables 
 Red=\033[0;31m
 NC=\033[0m # No Color
 Green=\033[0;32m
