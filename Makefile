@@ -7,6 +7,7 @@ GIT_TAG = $(APP_VSN)-$(BUILD)
 DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
 RED='\033[0;31m'
 NC='\033[0m' # No Color
+red=`tput setaf 1`
 
 help:
 	@echo "$(DOCKER_TAG)"
@@ -14,6 +15,7 @@ help:
 
 build: release ## Build the Docker image
 	@echo "build step..................................."
+	echo "${red}red text ${green}green text${reset}"
 	docker build --build-arg APP_NAME=$(APP_NAME) \
 		--build-arg APP_VSN=$(APP_VSN) \
 		-t $(APP_NAME):$(APP_VSN)-$(BUILD) \
