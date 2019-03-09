@@ -7,7 +7,7 @@ defmodule ApiUmbrella.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       app: :api_umbrella,
-      version: "1.0.1"
+      version: "1.0.2"
     ]
   end
 
