@@ -31,7 +31,7 @@ run: build ## Run the release with docker
 		--expose 4000 -p 4000:4000 \
 		--rm -it $(APP_NAME):latest
 		
-run_stack: ## Run the stack with docker-compose
+run_stack: ## Run the stack with docker-composes
 	docker-compose up -d
 
 stop_stack: ## Stop the stack with docker-compose
