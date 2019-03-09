@@ -32,7 +32,7 @@ stop_stack: ## Stop the stack
 	docker-compose stop
 
 release: ## Release
-	@echo -e "${RED}release step..................................."
+	@echo "${RED}release step...................................${NC}"
 	git commit -a -m "release $(GIT_TAG)"
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
