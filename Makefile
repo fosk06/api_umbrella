@@ -23,9 +23,9 @@ help:
 	@echo "current docker registry : $(DOCKER_REGISTRY)"
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-build: release ## Build the Docker image of the release
+build: tag ## Build the Docker image of the release
 	@echo "$(Green)build step ..........................................$(NC)"
-	docker build --build-arg APP_NAME=$(APP_NAME) \
+	@docker build --build-arg APP_NAME=$(APP_NAME) \
 		--build-arg APP_VSN=$(APP_VSN) \
 		-t $(DOCKER_TAG) \
 		-t $(REMOTE_DOCKER_TAG) \
@@ -43,7 +43,7 @@ run_stack: ## Run the stack with docker-composes
 stop_stack: ## Stop the stack with docker-compose
 	docker-compose stop
 
-release: ## Commit and push the new release
+tag: ## Create git tag and docker tag, commit and push with the tags
 	@echo "$(Green)release step ..........................................$(NC)"
 	git commit -a -m "release $(GIT_TAG)"
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
