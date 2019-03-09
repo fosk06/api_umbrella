@@ -7,7 +7,7 @@ GIT_TAG = $(APP_VSN)-$(BUILD)
 DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
 RED='\033[0;31m'
 NC='\033[0m' # No Color
-red=`tput setaf 1`
+Green='\033[0;32m'
 
 help:
 	@echo "$(DOCKER_TAG)"
@@ -34,7 +34,7 @@ stop_stack: ## Stop the stack
 	docker-compose stop
 
 release: ## Release
-	@echo "$(RED)release step.......................................$(NC)"
+	@echo "$(Green)release step.......................................$(NC)"
 	git commit -a -m "release $(GIT_TAG)"
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
