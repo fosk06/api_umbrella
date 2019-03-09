@@ -60,7 +60,6 @@ push: build ## push to docker registry
 	@echo "$(Red)Don't forget to set DOCKER_REGISTRY,DOCKER_USERNAME,DOCKER_PASSWORD in env $(NC)"
 	docker login $(DOCKER_REGISTRY) -p $(DOCKER_PASSWORD) -u $(DOCKER_USERNAME)
 	@echo "push to $(REMOTE_DOCKER_TAG)"
-	@docker tag $(DOCKER_TAG) $(REMOTE_DOCKER_TAG)
 	docker push $(REMOTE_DOCKER_TAG)
 
 run_local: ## Get deps, compile and run locally with mix tasks
