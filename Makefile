@@ -4,6 +4,7 @@ APP_NAME ?= `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e
 APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`
 BUILD ?= `git rev-parse --short HEAD`
 DOCKER_TAG = $(APP_NAME):$(APP_VSN)-$(BUILD)
+GIT_TAG = $(APP_VSN)-$(BUILD)
 
 help:
 	@echo "$(APP_NAME):$(APP_VSN)-$(BUILD)"
@@ -27,6 +28,6 @@ stop_stack: ## Stop the stack
 	docker-compose stop
 release: 
 	git add .
-	git commit -am "release $(DOCKER_TAG)"
-	git tag -a $(DOCKER_TAG) -m "release $(DOCKER_TAG)"
+	git commit -am "release $(GIT_TAG)"
+	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
