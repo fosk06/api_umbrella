@@ -29,9 +29,13 @@ stop_stack: ## Stop the stack
 	docker-compose stop
 
 release: ## Release
-	@echo "pre build : $(BUILD)"
+	@echo "pre GIT_TAG : $(GIT_TAG)"
 	git commit -a -m "release $(GIT_TAG)"
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
 	$(eval BUILD?=`git rev-parse --short HEAD`)
-	@echo "post build $(BUILD)"
+	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
+
+	# GIT_TAG = $(APP_VSN)-$(BUILD)
+	# DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
+	@echo "post GIT_TAG $(GIT_TAG)"
