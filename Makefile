@@ -24,7 +24,7 @@ help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 build: tag ## Build the Docker image of the release
-	@echo "$(Green)build step ..........................................$(NC)"
+	@echo "$(Green)Build step ..........................................$(NC)"
 	@docker build --build-arg APP_NAME=$(APP_NAME) \
 		--build-arg APP_VSN=$(APP_VSN) \
 		-t $(DOCKER_TAG) \
@@ -32,7 +32,7 @@ build: tag ## Build the Docker image of the release
 		-t $(APP_NAME):latest .
 
 run: build ## Run the release with docker 
-	@echo "$(Green)run step ..........................................$(NC)"
+	@echo "$(Green)Run step ..........................................$(NC)"
 	docker run --env-file config/docker.env \
 		--expose 4000 -p 4000:4000 \
 		--rm -it $(APP_NAME):latest
@@ -44,7 +44,7 @@ stop_stack: ## Stop the stack with docker-compose
 	docker-compose stop
 
 tag: ## Create git tag and docker tag, commit and push with the tags
-	@echo "$(Green)release step ..........................................$(NC)"
+	@echo "$(Green)Tag step ..........................................$(NC)"
 	git commit -a -m "release $(GIT_TAG)"
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
@@ -56,6 +56,7 @@ tag: ## Create git tag and docker tag, commit and push with the tags
 	@echo "$(Blue)REMOTE_DOCKER_TAG: $(REMOTE_DOCKER_TAG)$(NC)"
 
 push: build ## push to docker registry
+	@echo "$(Green)Push step ..........................................$(NC)"
 	@echo "$(Red)Don't forget to set DOCKER_REGISTRY,DOCKER_USERNAME,DOCKER_PASSWORD in env $(NC)"
 	docker login $(DOCKER_REGISTRY) -p $(DOCKER_PASSWORD) -u $(DOCKER_USERNAME)
 	@echo "push to $(REMOTE_DOCKER_TAG)"
@@ -63,10 +64,11 @@ push: build ## push to docker registry
 	docker push $(REMOTE_DOCKER_TAG)
 
 run_local: ## Get deps, compile and run locally with mix tasks
+	@echo "$(Green)Run local step ..........................................$(NC)"
 	@echo "$(Red) elixir, node.js and phoenix must be installed first !$(NC)"
 	@echo "$(Green) compile and run localy ........................ $(NC)"
 	mix do deps.get, deps.compile, compile, phx.digest, phx.server
-	
+
 test:
 	export $$(ENV_FILE) && echo "$$DOCKER_REGISTRY"
 	# @echo "$(Blue)$(ENV_FILE)$(NC)"
