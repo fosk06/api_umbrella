@@ -8,6 +8,7 @@ DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 Green='\033[0;32m'
+Blue='\044[0;34m'
 
 help:
 	@echo "$(DOCKER_TAG)"
@@ -40,5 +41,5 @@ release: ## Release
 	$(eval BUILD?=`git rev-parse --short HEAD`)
 	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
 	$(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG)-$(BUILD))
-	@echo "$(Green) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
+	@echo "$(Blue) DOCKER_TAG: $(DOCKER_TAG)$(NC)"
 test:
