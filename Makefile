@@ -34,4 +34,4 @@ release: ## Release
 	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
 	git push origin master
 	BUILD ?= `git rev-parse --short HEAD`
-	echo "$(BUILD)"
+	echo $(BUILD)
