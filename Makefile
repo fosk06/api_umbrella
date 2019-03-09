@@ -35,7 +35,7 @@ release: ## Release
 	git push origin master
 	$(eval BUILD?=`git rev-parse --short HEAD`)
 	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
-
-	# GIT_TAG = $(APP_VSN)-$(BUILD)
-	# DOCKER_TAG = $(APP_NAME):$(GIT_TAG)-$(BUILD)
-	@echo "post GIT_TAG $(GIT_TAG)"
+	$(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG)-$(BUILD))
+	@echo "BUILD $(BUILD)"
+	@echo "GIT_TAG $(GIT_TAG)"
+	@echo "DOCKER_TAG $(DOCKER_TAG)"
