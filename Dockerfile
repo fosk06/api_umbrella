@@ -31,7 +31,7 @@ RUN apk update && \
   apk upgrade --no-cache && \
   apk add --no-cache \
     nodejs \
-    yarn \
+    npm \
     git \
     build-base && \
   mix local.rebar --force && \
@@ -40,6 +40,7 @@ RUN apk update && \
 # This copies our app source code into the build container
 COPY . .
 
+# run mix tasks to get deps and compile code
 RUN mix do deps.get, deps.compile, compile
 
 # This step builds assets for the Phoenix app (if there is one)

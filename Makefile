@@ -21,5 +21,6 @@ run: ## Run the app in Docker
 		
 run_stack: ## Run the stack
 	docker-compose up -d
+	
 stop_stack: ## Stop the stack
 	docker-compose stop
