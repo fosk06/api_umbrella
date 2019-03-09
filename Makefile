@@ -45,8 +45,8 @@ stop_stack: ## Stop the stack with docker-compose
 
 tag: ## Create git tag and docker tag, commit and push with the tags
 	@echo "$(Green)Tag step ..........................................$(NC)"
-	git commit -a -m "release $(GIT_TAG)"
-	git tag -a $(GIT_TAG) -m "release $(GIT_TAG)"
+	git commit -a -m "release $(APP_VSN)"
+	git tag -a $(APP_VSN) -m "release $(APP_VSN)"
 	git push origin master
 	$(eval BUILD?=`git rev-parse --short HEAD`)
 	$(eval GIT_TAG=$(APP_VSN)-$(BUILD))
@@ -55,7 +55,7 @@ tag: ## Create git tag and docker tag, commit and push with the tags
 	@echo "$(Blue)DOCKER_TAG: $(DOCKER_TAG)$(NC)"
 	@echo "$(Blue)REMOTE_DOCKER_TAG: $(REMOTE_DOCKER_TAG)$(NC)"
 
-push: build ## push to docker registry
+push: build ## Build and push to docker registry
 	@echo "$(Green)Push step ..........................................$(NC)"
 	@echo "$(Red)Don't forget to set DOCKER_REGISTRY,DOCKER_USERNAME,DOCKER_PASSWORD in env $(NC)"
 	docker login $(DOCKER_REGISTRY) -p $(DOCKER_PASSWORD) -u $(DOCKER_USERNAME)
