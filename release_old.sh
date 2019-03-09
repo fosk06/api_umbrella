@@ -36,3 +36,15 @@ helm upgrade  --recreate-pods $RELEASENAME ./helm-chart
 ## delete the release
 # helm del --purge $RELEASENAME
 
+# grep 'DOCKER_REGISTRY' .env | cut -d '=' -f2
+
+
+# @echo "$(Green)push step ..........................................$(NC)"
+	# $(eval BUILD?=`git rev-parse --short HEAD`)
+	# $(eval GIT_TAG=$(APP_VSN)-$(BUILD))
+	# $(eval DOCKER_TAG=$(APP_NAME):$(GIT_TAG))
+	# # @echo "$(Blue)DOCKER_TAG: $(DOCKER_TAG)$(NC)"
+	# export $$(cat .env | grep -v ^\# | xargs) && docker login $$DOCKER_REGISTRY -p $$DOCKER_REGISTRY_PASSWORD -u $$DOCKER_REGISTRY_USERNAME
+	# export $$(cat .env | grep -v ^\# | xargs) && docker tag $(DOCKER_TAG) "$$DOCKER_REGISTRY/$$DOCKER_REGISTRY_USERNAME/$(DOCKER_TAG)"
+	# # @export $$(cat .env | grep -v ^\# | xargs) &&  echo "$$DOCKER_REGISTRY/$$DOCKER_REGISTRY_USERNAME/${DOCKER_TAG}"
+	# export $$(cat .env | grep -v ^\# | xargs) && docker push "$$DOCKER_REGISTRY/$$DOCKER_REGISTRY_USERNAME/${DOCKER_TAG}"
