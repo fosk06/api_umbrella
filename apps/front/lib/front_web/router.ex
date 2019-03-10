@@ -25,11 +25,14 @@ defmodule FrontWeb.Router do
 
   scope "/api/rest", FrontWeb do
     pipe_through [:api, :authentication]
-
     get "/ping", ApiController, :ping
   end
 
-  forward "/api/graphql", Absinthe.Plug,schema: FrontWeb.Schema
+  scope "/api/graphql", FrontWeb do
+    pipe_through [:api]
+    forward "/api/graphql", Absinthe.Plug,schema: FrontWeb.Schema
+  end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", FrontWeb do

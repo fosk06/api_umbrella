@@ -26,14 +26,13 @@ defmodule FrontWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Logger
 
-  plug Absinthe.Plug,
-    schema: FrontWeb.Schema
-
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json, Absinthe.Plug.Parser],
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  plug Absinthe.Plug,
+    schema: FrontWeb.Schema
   plug Plug.MethodOverride
   plug Plug.Head
 
