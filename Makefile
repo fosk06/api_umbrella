@@ -48,7 +48,7 @@ commit_push: ## Commit and push code
 	git push origin master
 	
 
-push: build ## Build and push to docker registry
+push: build ## Build and push to docker registry 
 	@echo "$(Green)Push step ..........................................$(NC)"
 	@echo "$(Red)Don't forget to set DOCKER_REGISTRY,DOCKER_USERNAME,DOCKER_PASSWORD in env $(NC)"
 	docker login $(DOCKER_REGISTRY) -p $(DOCKER_PASSWORD) -u $(DOCKER_USERNAME)
