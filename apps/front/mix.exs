@@ -44,7 +44,9 @@ defmodule Front.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:basic_auth, "~> 2.2.2"},
-      {:greeter, in_umbrella: true}
+      {:greeter, in_umbrella: true},
+      {:absinthe_plug, "~> 1.4"},
+      {:poison, "~> 2.1.0"},
     ]
   end
 end
