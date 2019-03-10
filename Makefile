@@ -43,7 +43,8 @@ stop_stack: ## Stop the stack with docker-compose
 
 commit_push: ## Commit and push code
 	@echo "$(Green)Commit and Push step ...........................................$(NC)"
-	git commit -a -m "release $(APP_VSN)"
+	git add .
+	git commit
 	git push origin master
 	
 
