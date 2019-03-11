@@ -1,4 +1,9 @@
-.PHONY: help
+.PHONY: help test
+.SILENT: ;               # no need for @
+.ONESHELL: ;             # recipes execute in same shell
+.NOTPARALLEL: ;          # wait for this target to finish
+.EXPORT_ALL_VARIABLES: ; # send all vars to shell
+
 
 APP_NAME ?= `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g'`
 APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`
@@ -10,6 +15,11 @@ Red=\033[0;31m
 NC=\033[0m # No Color
 Green=\033[0;32m
 Blue=\033[0;36m
+
+
+define my_test = 
+	ls
+endef
 
 help:
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -51,11 +61,12 @@ push: build ## Build and push to docker registry
 	@echo "push to $(REMOTE_DOCKER_TAG)"
 	docker push $(REMOTE_DOCKER_TAG)
 
-run_local: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and phoenix must be installed to run localy.
+start: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and phoenix must be installed to run localy.
 	@echo "$(Green)Run local step ..........................................$(NC)"
 	@echo "$(Red) elixir, node.js and phoenix must be installed first !$(NC)"
 	@echo "$(Green) compile and run localy ........................ $(NC)"
 	mix do deps.get, deps.compile, compile, phx.digest, phx.server
 
 test:
-	export $$(ENV_FILE) && echo "$$DOCKER_REGISTRY"
+	FILES:=$(shell ./test.sh)
+	@echo "FILES : $(FILES)"
