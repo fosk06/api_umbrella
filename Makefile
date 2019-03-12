@@ -67,6 +67,5 @@ start: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and 
 	@echo "$(Green) compile and run localy ........................ $(NC)"
 	mix do deps.get, deps.compile, compile, phx.digest, phx.server
 
-test:
-	FILES:=$(shell ./test.sh)
-	@echo "FILES : $(FILES)"
+start_db: ## start db with docker
+	docker-compose up -d db
