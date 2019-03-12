@@ -8,8 +8,7 @@ defmodule DbConnector.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Starts a worker by calling: DbConnector.Worker.start_link(arg)
-      # {DbConnector.Worker, arg},
+      DbConnector.Repo,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

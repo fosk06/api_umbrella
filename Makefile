@@ -69,3 +69,8 @@ start: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and 
 
 start_db: ## start db with docker
 	docker-compose up -d db
+	
+reset_db: ## reset db
+	mix ecto.drop
+	mix ecto.create
+	mix ecto.migrate

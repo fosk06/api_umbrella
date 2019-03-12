@@ -8,6 +8,12 @@ config :db_connector, DbConnector.Repo,
   password: "postgres",
   hostname: "localhost"
 
+config :db_connector, ecto_repos: [DbConnector.Repo]
+
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
