@@ -34,4 +34,18 @@ defmodule DbConnector.Person do
           end
     end
 
-  end
+    def getAllPeople(params \\ %{}) do
+        people =  DbConnector.Person |> DbConnector.Repo.all
+        Logger.info "person: #{inspect(people)}"
+        {:ok, people}
+        # case DbConnector.Person |> DbConnector.Repo.all do
+        #     {:ok, person} ->
+        #       Logger.info "person: #{inspect(person)}"
+        #       {:ok, person}
+        #     {:error, err} ->
+        #       Logger.error "err: #{inspect(err)}"
+        #   end
+ 
+    end
+
+end

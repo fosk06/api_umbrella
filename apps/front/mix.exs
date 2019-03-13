@@ -47,7 +47,7 @@ defmodule Front.MixProject do
       {:greeter, in_umbrella: true},
       {:db_connector, in_umbrella: true},
       {:absinthe_plug, "~> 1.4"},
-      {:poison, "~> 2.1.0"},
+      {:poison, "~> 3.0"},
     ]
   end
 end
