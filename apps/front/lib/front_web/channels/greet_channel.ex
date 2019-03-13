@@ -6,12 +6,13 @@ defmodule FrontWeb.GreetChannel do
   end
 
   def greet("room:greet", name, socket) do
-    greet = Greeter.hello(name)
+    greet = %{status: "up"}
     {:ok, greet}
   end
 
   def handle_in("greet", %{"name" => name}, socket) do
-    broadcast! socket, "greet", %{msg: Greeter.hello(name)}
+    greet = %{status: "up"}
+    broadcast! socket, "greet", %{msg: "up"}
     {:noreply, socket}
   end
 end

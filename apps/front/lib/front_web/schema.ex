@@ -14,6 +14,10 @@ defmodule FrontWeb.Schema do
         arg :id, non_null(:id)
         resolve &Resolvers.Item.getItemById/3
       end
+      field :people, list_of(:person) do
+        # resolve &Resolvers.Item.getItemById/3
+        resolve &Person.getAllPeople/3
+      end
     end
   
   end

@@ -51,7 +51,9 @@ release :api_umbrella do
   set applications: [
     :runtime_tools,
     front: :permanent,
-    greeter: :permanent
+    person: :permanent,
+    person: :permanent,
+    db_connector: :permanent
   ]
 end
 
