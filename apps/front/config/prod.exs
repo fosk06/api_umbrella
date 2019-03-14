@@ -19,7 +19,7 @@ config :front, FrontWeb.Endpoint,
   version: Application.spec(:front, :vsn)
 
 # Do not print debug messages in production
-config :logger, level: :info
+# config :logger, level: :info
 
 config :front, authentication: [
   username: {:system, "BASIC_AUTH_USERNAME"},

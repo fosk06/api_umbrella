@@ -1,4 +1,7 @@
 defmodule Person do
+  alias DbConnector.Person, as: PersonModel
+  alias DbConnector.Repo
+
   @moduledoc """
   Documentation for Person.
   """
@@ -28,17 +31,21 @@ defmodule Person do
     {:ok, people}
   end
 
-  def create(params \\ %{}) do
-    person = %DbConnector.Person{}
-    changeset = DbConnector.Person.changeset(person, params)
-    case DbConnector.Repo.insert(changeset) do
-        {:ok, person} ->
-          # do something with person
-          Logger.info "person: #{inspect(person)}"
-        {:error, changeset} ->
-          # do something with changeset
-          Logger.error "person: #{inspect(changeset)}"
-      end
+  def signUp(_parent, %{input: input}, _resolution) do
+    person = %PersonModel{}
+    changeset = PersonModel.changeset(person, input)
+    case Repo.insert(changeset) do
+      {:ok, %{id: id}} ->
+        Logger.info "id person: #{inspect(id)}"
+        standard_reponse = %{status: "done", message: "sign up success, id : #{id}"}
+        {:ok, standard_reponse}
+      {:error, changeset} ->
+        Logger.error "person: #{inspect(changeset)}"
+        standard_reponse = %{status: "error", message: inspect(changeset)}
+        {:ok, standard_reponse}
+    end
+    
   end
+
 
 end

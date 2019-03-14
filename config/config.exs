@@ -7,6 +7,14 @@ use Mix.Config
 # they all use the same configuration. While one could
 # configure all applications here, we prefer to delegate
 # back to each application for organization purposes.
+config :logger,
+  backends: [:console],
+  format: "$time $metadata $message\n",
+  metadata: [:application, :module],
+  compile_time_purge_matching: [
+    [level_lower_than: :info]
+  ]
+
 import_config "../apps/*/config/config.exs"
 
 # Sample configuration (overrides the imported configuration above):

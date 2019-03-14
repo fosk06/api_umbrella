@@ -19,33 +19,8 @@ defmodule DbConnector.Person do
         |> validate_required([:first_name, :last_name, :password, :email])
         |> validate_format(:email, ~r/@/)
         |> validate_inclusion(:age, 0..130)
+        |> unique_constraint(:email)
     end
 
-    def create(params \\ %{}) do
-        person = %DbConnector.Person{}
-        changeset = DbConnector.Person.changeset(person, params)
-        case DbConnector.Repo.insert(changeset) do
-            {:ok, person} ->
-              # do something with person
-              Logger.info "person: #{inspect(person)}"
-            {:error, changeset} ->
-              # do something with changeset
-              Logger.error "person: #{inspect(changeset)}"
-          end
-    end
-
-    def getAllPeople(params \\ %{}) do
-        people =  DbConnector.Person |> DbConnector.Repo.all
-        Logger.info "person: #{inspect(people)}"
-        {:ok, people}
-        # case DbConnector.Person |> DbConnector.Repo.all do
-        #     {:ok, person} ->
-        #       Logger.info "person: #{inspect(person)}"
-        #       {:ok, person}
-        #     {:error, err} ->
-        #       Logger.error "err: #{inspect(err)}"
-        #   end
- 
-    end
 
 end
