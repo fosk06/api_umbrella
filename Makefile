@@ -70,7 +70,12 @@ start: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and 
 start_db: ## start db with docker
 	docker-compose up -d db
 	
-reset_db: ## reset db
-	mix ecto.drop
+reset_db: ## recreate database with tables and test data, use on development ONLY
+	## drop DB
+	mix ecto.drop 
+	## create DB
 	mix ecto.create
+	## run migrations, create tables
 	mix ecto.migrate
+	## seed tables with fake data
+	mix run apps/db_connector/priv/repo/seeds.exs

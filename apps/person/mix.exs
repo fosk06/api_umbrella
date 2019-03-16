@@ -28,7 +28,9 @@ defmodule Person.MixProject do
     [
       {:db_connector, in_umbrella: true},
       {:uuid, "~> 1.1"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:bcrypt_elixir, "~> 2.0"},
+      {:faker, "~> 0.12.0"}
     ]
   end
 end

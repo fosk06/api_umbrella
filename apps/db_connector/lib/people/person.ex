@@ -8,7 +8,8 @@ defmodule DbConnector.Person do
       field :last_name, :string
       field :email, :string
       field :email_token, :string
-      field :password, :string
+      field :password, :string, virtual: true
+      field :password_hash, :string
       field :email_validated, :boolean
       field :age, :integer
       
@@ -21,7 +22,10 @@ defmodule DbConnector.Person do
         |> validate_required([:first_name, :last_name, :password, :email])
         |> validate_format(:email, ~r/@/)
         |> validate_inclusion(:age, 0..130)
-        |> unique_constraint(:email)
+        |> validate_length(:first_name, min: 3, max: 20)
+        |> validate_length(:last_name, min: 3, max: 20)
+        |> validate_length(:password, min: 5, max: 20)
+        |> unique_constraint(:email, downcase: true)
     end
 
 
