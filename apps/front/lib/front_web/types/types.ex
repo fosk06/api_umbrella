@@ -17,6 +17,8 @@ defmodule FrontWeb.Schema.Types do
       field :password, :string
       field :email_validated, :boolean
       field :age, :integer
+      field :inserted_at, :string
+      field :updated_at, :string
     end
 
     @desc "An Email"
@@ -34,14 +36,6 @@ defmodule FrontWeb.Schema.Types do
     object :standard_reponse do
       field :status, :string
       field :message, :string
-    end
-    
-    @desc "the sign up input"
-    input_object :sign_up_input do
-      field :email, :string
-      field :first_name, :string
-      field :last_name, :string
-      field :password, :string
     end
   
   end

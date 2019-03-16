@@ -11,11 +11,13 @@ defmodule DbConnector.Person do
       field :password, :string
       field :email_validated, :boolean
       field :age, :integer
+      
+      timestamps(type: :utc_datetime_usec)
     end
 
     def changeset(person, params \\ %{}) do
         person
-        |> cast(params, [:first_name,:last_name, :email, :email_validated, :password, :age])
+        |> cast(params, [:first_name,:last_name, :email,:email_token, :email_validated, :password, :age])
         |> validate_required([:first_name, :last_name, :password, :email])
         |> validate_format(:email, ~r/@/)
         |> validate_inclusion(:age, 0..130)

@@ -2,6 +2,7 @@ defmodule FrontWeb.Schema do
 
     use Absinthe.Schema
     import_types FrontWeb.Schema.Types
+    import_types FrontWeb.Schema.Inputs
     alias FrontWeb.Resolvers
 
 

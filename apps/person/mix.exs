@@ -18,7 +18,7 @@ defmodule Person.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger,:timex],
       mod: {Person.Application, []}
     ]
   end
@@ -26,7 +26,9 @@ defmodule Person.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:db_connector, in_umbrella: true}
+      {:db_connector, in_umbrella: true},
+      {:uuid, "~> 1.1"},
+      {:timex, "~> 3.0"}
     ]
   end
 end
