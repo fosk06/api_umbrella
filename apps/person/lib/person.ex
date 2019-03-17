@@ -32,13 +32,11 @@ defmodule Person do
   end
 
   def signUp(_parent, %{input: input}, _resolution) do
-    uuid = UUID.uuid4()
-    person = %PersonModel{}
-    person = Map.put(person, :inserted_at, DateTime.utc_now)
-    person = Map.put(person, :updated_at, DateTime.utc_now)
-    person = Map.put(person, :email_token, uuid)
+    # uuid = UUID.uuid4()
+    # person = Map.put(person, :email_token, uuid)
     Logger.info "person signup: #{inspect(person)}"
-    changeset = PersonModel.changeset(person, input)
+    changeset = PersonModel.changeset(%PersonModel{}, input)|> put_email_token()
+
     case Repo.insert(changeset) do
       {:ok, %{id: id}} ->
         # Logger.info "id person: #{inspect(id)}"

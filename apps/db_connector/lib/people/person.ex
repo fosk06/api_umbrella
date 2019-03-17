@@ -43,4 +43,14 @@ defmodule DbConnector.Person do
       end
     end
 
+    defp put_email_token(changeset) do
+      uuid = UUID.uuid4()
+      case changeset do
+        %Ecto.Changeset{valid?: true} ->
+          put_change(changeset, :email_token, uuid)
+        _ ->
+          changeset
+      end
+    end
+
 end
