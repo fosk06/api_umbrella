@@ -12,6 +12,7 @@ defmodule DbConnector.Person do
       field :password_hash, :string
       field :email_validated, :boolean
       field :age, :integer
+      field(:token, :string)
       
       timestamps(type: :utc_datetime_usec)
     end

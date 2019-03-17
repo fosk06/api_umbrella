@@ -1,9 +1,9 @@
 alias DbConnector.Repo
 alias DbConnector.Person
 
-# Create 10 seed users
+# Create 5 seed users
 
-for _ <- 1..10 do
+for _ <- 1..5 do
   Repo.insert!(%Person{
     first_name: Faker.Name.first_name,
     last_name: Faker.Name.last_name,

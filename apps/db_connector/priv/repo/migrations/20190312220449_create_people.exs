@@ -9,8 +9,9 @@ defmodule DbConnector.Repo.Migrations.CreatePeople do
       add :email_token, :string
       add :password_hash, :string
       add :email_validated, :boolean, default: false
-      add :age, :integer,
+      add :age, :integer
       add :token, :text
+      
 
       timestamps(type: :utc_datetime_usec)
     end
