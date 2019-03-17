@@ -1,4 +1,5 @@
 defmodule Person.Resolvers do
+    require Logger
     alias DbConnector.Person, as: PersonModel
     alias DbConnector.Repo
   
@@ -11,7 +12,7 @@ defmodule Person.Resolvers do
     get all the person record
     """
     def getAllPeople(_parent, _args, _resolution) do
-      people =  DbConnector.Person |> DbConnector.Repo.all
+      people =  PersonModel |> Repo.all
       Logger.info "person: #{inspect(people)}"
       {:ok, people}
     end
