@@ -3,10 +3,10 @@ defmodule FrontWeb.Schema.Inputs do
     
     @desc "the sign up input"
     input_object :sign_up_input do
-      field :email, :string
-      field :first_name, :string
-      field :last_name, :string
-      field :password, :string
+      field :email, non_null(:string)
+      field :first_name, non_null(:string)
+      field :last_name, non_null(:string)
+      field :password, non_null(:string)
     end
   
   end

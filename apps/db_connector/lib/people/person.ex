@@ -26,7 +26,21 @@ defmodule DbConnector.Person do
         |> validate_length(:last_name, min: 3, max: 20)
         |> validate_length(:password, min: 5, max: 20)
         |> unique_constraint(:email, downcase: true)
+        |> put_password_hash()
     end
 
+    def store_token_changeset(%DbConnector.Person{} = person, attrs) do
+      person
+      |> cast(attrs, [:token])
+    end
+
+    defp put_password_hash(changeset) do
+      case changeset do
+        %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+          put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(pass))
+        _ ->
+          changeset
+      end
+    end
 
 end

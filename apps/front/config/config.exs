@@ -14,6 +14,18 @@ config :front, FrontWeb.Endpoint,
   render_errors: [view: FrontWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Front.PubSub, adapter: Phoenix.PubSub.PG2]
 
+# configures Guardian
+config :front, FrontWeb.Guardian,
+  allowed_algos: ["HS512"],
+  verify_module: Guardian.JWT,
+  issuer: "FrontWeb",
+  ttl: {30, :days},
+  allowed_drift: 2000,
+  verify_issuer: true,
+  # generated using: JOSE.JWK.generate_key({:oct, 16}) |> JOSE.JWK.to_map |> elem(1)
+  secret_key: %{"k" => "vgEC-aQr3Zr7ksVO4BShiQ", "kty" => "oct"},
+  serializer: FrontWeb.Guardian
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

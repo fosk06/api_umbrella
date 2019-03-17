@@ -46,7 +46,8 @@ defmodule Front.MixProject do
       {:basic_auth, "~> 2.2.2"},
       {:person, in_umbrella: true},
       {:absinthe_plug, "~> 1.4"},
-      {:poison, "~> 3.0"}
+      {:poison, "~> 3.0"},
+      {:guardian, "~> 1.2"}
     ]
   end
 end
