@@ -43,7 +43,7 @@ defmodule DbConnector.Person do
       end
     end
 
-    defp put_email_token(changeset) do
+    def put_email_token(changeset) do
       uuid = UUID.uuid4()
       case changeset do
         %Ecto.Changeset{valid?: true} ->

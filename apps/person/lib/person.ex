@@ -1,6 +1,4 @@
 defmodule Person do
-  alias DbConnector.Person, as: PersonModel
-  alias DbConnector.Repo
 
   @moduledoc """
   Documentation for Person.
@@ -19,35 +17,6 @@ defmodule Person do
 
   def hello do
     :world
-  end
-
-  @doc """
-  getAllPeople.
-  get all the person record
-  """
-  def getAllPeople(_parent, _args, _resolution) do
-    people =  DbConnector.Person |> DbConnector.Repo.all
-    Logger.info "person: #{inspect(people)}"
-    {:ok, people}
-  end
-
-  def signUp(_parent, %{input: input}, _resolution) do
-    # uuid = UUID.uuid4()
-    # person = Map.put(person, :email_token, uuid)
-    Logger.info "person signup: #{inspect(person)}"
-    changeset = PersonModel.changeset(%PersonModel{}, input)|> put_email_token()
-
-    case Repo.insert(changeset) do
-      {:ok, %{id: id}} ->
-        # Logger.info "id person: #{inspect(id)}"
-        standard_reponse = %{status: "done", message: "sign up success, id : #{id}"}
-        {:ok, standard_reponse}
-      {:error, changeset} ->
-        Logger.error "error: #{inspect(changeset)}"
-        standard_reponse = %{status: "error", message: inspect(changeset.errors)}
-        {:ok, standard_reponse}
-    end
-    
   end
 
 
