@@ -27,6 +27,7 @@ defmodule FrontWeb.Context do
     end
   
     defp authorize(token) do
+      Logger.info "authorize with #{inspect(token)}"
       Person
       |> where(token: ^token)
       |> Repo.one

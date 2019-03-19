@@ -39,7 +39,7 @@ defmodule FrontWeb.Schema.Types do
     end
 
     @desc "the sign in response"
-    object :signin_response do
+    object :session do
       field :token, :string
     end
   

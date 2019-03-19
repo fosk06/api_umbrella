@@ -18,7 +18,7 @@ defmodule FrontWeb.Schema do
       end
 
       @desc "Sign in"
-      field :sign_in, :signin_response do
+      field :sign_in, :session do
         arg :input, non_null(:sign_in_input)
         resolve &Person.Resolvers.signIn/3
       end
