@@ -18,7 +18,7 @@ defmodule FrontWeb.Router do
   end
 
   pipeline :graphql do
-    plug FrontWeb.Context
+	  plug FrontWeb.Context
   end
 
   scope "/", FrontWeb do
@@ -33,8 +33,8 @@ defmodule FrontWeb.Router do
   end
 
   scope "/api/graphql", FrontWeb do
-    pipe_through [:graphql]
-    forward "/api/graphql", Absinthe.Plug,schema: FrontWeb.Schema
+    pipe_through [:api, :graphql]
+    forward "/api/graphql", Absinthe.Plug, schema: FrontWeb.Schema
   end
 
 

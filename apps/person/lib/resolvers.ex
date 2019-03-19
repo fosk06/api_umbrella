@@ -34,9 +34,9 @@ defmodule Person.Resolvers do
       
     end
 
-    def findByEmail(_,%{email: email}, info) do
+    def findByEmail(_,%{email: email}, %{context: context}) do
       person = PersonHelper.get_user_by_email(email)
-      Logger.info "context: #{inspect(info.context)}"
+      Logger.info "context: #{inspect(context)}"
       {:ok, person}
       # case PersonHelper.get_user_by_email(email) do
       #   nil -> {:error, "Person email #{email} not found!"}
