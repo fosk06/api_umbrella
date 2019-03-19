@@ -74,6 +74,7 @@ start_interactive: ## start with interative terminal(iex)
 	iex -S mix
 	
 reset_db: ## recreate database with tables and test data, use on development ONLY
+	docker-compose up -d db
 	## drop DB
 	mix ecto.drop 
 	## create DB

@@ -3,6 +3,7 @@ defmodule Person.Resolvers do
     alias DbConnector.Person, as: PersonModel
     alias DbConnector.Repo
     alias Person.Helpers.AuthHelper
+    alias Person.Helpers.Person , as: PersonHelper
   
     @moduledoc """
     Documentation for Person.
@@ -33,13 +34,30 @@ defmodule Person.Resolvers do
       
     end
 
-    def login(_parent,,%{email: email, password: password}, _info) do
-      with {:ok, person} <- login_with_email_pass(email, password),
+    def find(%{email: email}, %{context: %{current_user: _current_user}}) do
+      case PersonHelper.get_user_by_email(email) do
+        nil -> {:error, "User email #{email} not found!"}
+        user -> {:ok, user}
+      end
+    end
+
+    def signIn(_parent,%{input: %{email: email, password: password}}, _info) do
+      with {:ok, person} <- AuthHelper.login_with_email_pass(email, password),
            {:ok, jwt, _} <- Front.Guardian.encode_and_sign(person),
-           {:ok, _} <- PersonModel.store_token(person, jwt) do
+           {:ok, _} <- PersonHelper.store_token(person, jwt) do
         {:ok, %{token: jwt}}
       end
     end
+
+    def signOut(_args,  %{context: %{current_user: current_user, token: _token}}) do
+      PersonHelper.revoke_token(current_user, nil)
+      {:ok, current_user}
+    end
+  
+    def signOut(_args, _info) do
+      {:error, "Please log in first!"}
+    end
+  
   
   
   end
