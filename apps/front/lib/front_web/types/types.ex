@@ -37,5 +37,10 @@ defmodule FrontWeb.Schema.Types do
       field :status, :string
       field :message, :string
     end
+
+    @desc "the sign in response"
+    object :signin_response do
+      field :token, :string
+    end
   
   end

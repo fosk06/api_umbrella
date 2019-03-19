@@ -17,6 +17,10 @@ defmodule FrontWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug FrontWeb.Context
+  end
+
   scope "/", FrontWeb do
     pipe_through [:browser, :authentication]
 
@@ -29,7 +33,7 @@ defmodule FrontWeb.Router do
   end
 
   scope "/api/graphql", FrontWeb do
-    pipe_through [:api]
+    pipe_through [:graphql]
     forward "/api/graphql", Absinthe.Plug,schema: FrontWeb.Schema
   end
 

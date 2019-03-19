@@ -34,24 +34,27 @@ defmodule Person.Resolvers do
       
     end
 
-    def find(%{email: email}, %{context: %{current_user: _current_user}}) do
-      case PersonHelper.get_user_by_email(email) do
-        nil -> {:error, "User email #{email} not found!"}
-        user -> {:ok, user}
-      end
+    def findByEmail(_,%{email: email}, info) do
+      person = PersonHelper.get_user_by_email(email)
+      Logger.info "context: #{inspect(info.context)}"
+      {:ok, person}
+      # case PersonHelper.get_user_by_email(email) do
+      #   nil -> {:error, "Person email #{email} not found!"}
+      #   person -> {:ok, person}
+      # end
     end
 
     def signIn(_parent,%{input: %{email: email, password: password}}, _info) do
       with {:ok, person} <- AuthHelper.login_with_email_pass(email, password),
-           {:ok, jwt, _} <- Front.Guardian.encode_and_sign(person),
+           {:ok, jwt, _} <- FrontWeb.Guardian.encode_and_sign(person),
            {:ok, _} <- PersonHelper.store_token(person, jwt) do
         {:ok, %{token: jwt}}
       end
     end
 
-    def signOut(_args,  %{context: %{current_user: current_user, token: _token}}) do
-      PersonHelper.revoke_token(current_user, nil)
-      {:ok, current_user}
+    def signOut(_args,  %{context: %{current_person: current_person, token: _token}}) do
+      PersonHelper.revoke_token(current_person, nil)
+      {:ok, current_person}
     end
   
     def signOut(_args, _info) do

@@ -10,6 +10,18 @@ defmodule FrontWeb.Schema do
       field :people, list_of(:person) do
         resolve &Person.Resolvers.getAllPeople/3
       end
+  
+      @desc "Get a person by email"
+      field :person_by_email, :person do
+        arg :email, non_null(:string)
+        resolve &Person.Resolvers.findByEmail/3
+      end
+
+      @desc "Sign in"
+      field :sign_in, :signin_response do
+        arg :input, non_null(:sign_in_input)
+        resolve &Person.Resolvers.signIn/3
+      end
     end
 
     mutation do
