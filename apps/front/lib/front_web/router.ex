@@ -12,30 +12,25 @@ defmodule FrontWeb.Router do
   pipeline :authentication do
     plug BasicAuth, use_config: {:front, :authentication}
   end
-
+  
   pipeline :api do
     plug :accepts, ["json"]
   end
-
   pipeline :graphql do
 	  plug FrontWeb.Context
   end
 
   scope "/", FrontWeb do
     pipe_through [:browser, :authentication]
-
+    
     get "/", PageController, :index
   end
-
-  scope "/api/rest", FrontWeb do
-    pipe_through [:api, :authentication]
-    get "/ping", ApiController, :ping
-  end
-
-  scope "/api/graphql", FrontWeb do
+  
+  scope "/api" do
     pipe_through [:api, :graphql]
-    forward "/api/graphql", Absinthe.Plug, schema: FrontWeb.Schema
+    forward("/", Absinthe.Plug, schema: FrontWeb.Schema)
   end
+
 
 
   # Other scopes may use custom stacks.

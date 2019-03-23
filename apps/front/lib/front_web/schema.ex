@@ -14,7 +14,7 @@ defmodule FrontWeb.Schema do
       @desc "Get a person by email"
       field :person_by_email, :person do
         arg :email, non_null(:string)
-        resolve &Person.Resolvers.findByEmail/3
+        resolve &Person.Resolvers.findByEmail/2
       end
 
       @desc "Sign in"
@@ -29,6 +29,12 @@ defmodule FrontWeb.Schema do
       field :sign_up, type: :standard_reponse do
         arg :input, non_null(:sign_up_input)
         resolve &Person.Resolvers.signUp/3
+      end
+      
+      @desc "Create"
+      field :create_person, type: :person do
+        arg :input, non_null(:sign_up_input)
+        resolve &Person.Resolvers.create/2
       end
     
     end

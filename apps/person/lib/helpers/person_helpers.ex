@@ -2,7 +2,7 @@ defmodule Person.Helpers.Person do
     @moduledoc """
     The boundary for the Accounts system.
     """
-  
+    require Logger
     import Ecto.Query, warn: false
     alias DbConnector.Repo
     alias DbConnector.Person
@@ -104,6 +104,7 @@ defmodule Person.Helpers.Person do
     end
   
     def store_token(%Person{} = user, token) do
+      # Logger.info "store_token: #{inspect(token)}"
       user
       |> Person.store_token_changeset(%{token: token})
       |> Repo.update()

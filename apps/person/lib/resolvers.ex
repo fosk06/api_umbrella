@@ -4,7 +4,8 @@ defmodule Person.Resolvers do
     alias DbConnector.Repo
     alias Person.Helpers.AuthHelper
     alias Person.Helpers.Person , as: PersonHelper
-  
+    import Ecto.Query, warn: false
+
     @moduledoc """
     Documentation for Person.
     """
@@ -34,14 +35,26 @@ defmodule Person.Resolvers do
       
     end
 
-    def findByEmail(_,%{email: email}, %{context: context}) do
-      person = PersonHelper.get_user_by_email(email)
-      Logger.info "context: #{inspect(context)}"
-      {:ok, person}
-      # case PersonHelper.get_user_by_email(email) do
-      #   nil -> {:error, "Person email #{email} not found!"}
-      #   person -> {:ok, person}
-      # end
+    def create(args, %{context: %{current_user: _current_user}}) do
+      PersonHelper.create_user(args)
+    end
+  
+    def create(_args, _info) do
+      {:error, "Not Authorized"}
+    end
+
+    def findByEmail(%{email: email}, %{context: %{current_user: current_user}}) do
+      Logger.info "current_user: #{inspect(current_user)}"
+      # Logger.info "person: #{inspect(person)}"
+      case PersonHelper.get_user_by_email(email) do
+        nil -> {:error, "Person email #{email} not found!"}
+        person -> {:ok, person}
+        _ -> {:error, "An error occured"}
+      end
+    end
+
+    def findByEmail(_args, _info) do
+      {:error, "Not Authorized"}
     end
 
     def signIn(_parent,%{input: %{email: email, password: password}}, _info) do
