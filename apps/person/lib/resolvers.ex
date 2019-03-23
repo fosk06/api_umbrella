@@ -64,6 +64,10 @@ defmodule Person.Resolvers do
       {:error, "Not Authorized"}
     end
 
+    @doc """
+    signin resolver, return the JWT token.
+    find a person by email, protected by JWT authorization
+    """
     def signIn(_parent,%{input: %{email: email, password: password}}, _info) do
       with {:ok, person} <- AuthHelper.login_with_email_pass(email, password),
            {:ok, jwt, _} <- FrontWeb.Guardian.encode_and_sign(person),
@@ -72,6 +76,10 @@ defmodule Person.Resolvers do
       end
     end
 
+    @doc """
+    signin resolver, return the JWT token.
+    find a person by email, protected by JWT authorization
+    """
     def signOut(_args,  %{context: %{current_person: current_person, token: _token}}) do
       PersonHelper.revoke_token(current_person, nil)
       {:ok, current_person}
