@@ -12,15 +12,6 @@ defmodule FrontWeb.Context do
       context = build_context(conn)
       Absinthe.Plug.put_options(conn, context: context)
     end
-
-    # def call(conn, _) do
-    #   case build_context(conn) do
-    #     {:ok, context} ->
-    #       put_private(conn, :absinthe, %{context: context})
-    #     _ ->
-    #       conn
-    #   end
-    # end
   
   @doc """
   Return the current user context based on the authorization header
@@ -30,7 +21,7 @@ defmodule FrontWeb.Context do
     {:ok, current_user} <- authorize(token) do
       %{current_user: current_user}
     else
-      _ -> %{jambon: "beurre"}
+      _ -> %{}
     end
   end
   
