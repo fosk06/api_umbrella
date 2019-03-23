@@ -43,16 +43,23 @@ defmodule Person.Resolvers do
       {:error, "Not Authorized"}
     end
 
+    @doc """
+    findByEmail.
+    find a person by email, protected by JWT authorization
+    """
     def findByEmail(%{email: email}, %{context: %{current_user: current_user}}) do
       Logger.info "current_user: #{inspect(current_user)}"
-      # Logger.info "person: #{inspect(person)}"
       case PersonHelper.get_user_by_email(email) do
-        nil -> {:error, "Person email #{email} not found!"}
+        nil -> {:error, "email #{email} not found"}
         person -> {:ok, person}
         _ -> {:error, "An error occured"}
       end
     end
 
+    @doc """
+    findByEmail default implementation
+    find a person by email, protected by JWT authorization
+    """
     def findByEmail(_args, _info) do
       {:error, "Not Authorized"}
     end

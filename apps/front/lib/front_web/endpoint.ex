@@ -31,8 +31,6 @@ defmodule FrontWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Poison
 
-  plug Absinthe.Plug,
-    schema: FrontWeb.Schema
   plug Plug.MethodOverride
   plug Plug.Head
 
