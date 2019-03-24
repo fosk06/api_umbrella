@@ -80,8 +80,7 @@ defmodule Person.Resolvers do
     sign out resolver, return remove the JWT token from db
     """
     def signOut(_args,  %{context: %{current_person: current_person, token: _token}}) do
-      person = current_person[:current_person]
-      PersonHelper.revoke_token(person, nil)
+      PersonHelper.revoke_token(current_person[:current_person], nil)
       standard_reponse = %{status: "done", message: "sign out success"}
       {:ok, standard_reponse}
     end
