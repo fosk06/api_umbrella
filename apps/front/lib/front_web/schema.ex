@@ -22,6 +22,8 @@ defmodule FrontWeb.Schema do
         arg :input, non_null(:sign_in_input)
         resolve &Person.Resolvers.signIn/3
       end
+
+
     end
 
     mutation do
@@ -30,6 +32,12 @@ defmodule FrontWeb.Schema do
         arg :input, non_null(:sign_up_input)
         resolve &Person.Resolvers.signUp/3
       end
+      
+      @desc "Sign out"
+      field :sign_out, type: :standard_reponse do
+        arg(:id, non_null(:id))
+        resolve &Person.Resolvers.signOut/2
+       end
       
       @desc "Create"
       field :create_person, type: :person do

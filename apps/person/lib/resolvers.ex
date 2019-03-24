@@ -35,8 +35,8 @@ defmodule Person.Resolvers do
       
     end
 
-    def create(args, %{context: %{current_user: _current_user}}) do
-      PersonHelper.create_user(args)
+    def create(args, %{context: %{current_person: _current_person}}) do
+      PersonHelper.create_person(args)
     end
   
     def create(_args, _info) do
@@ -47,9 +47,9 @@ defmodule Person.Resolvers do
     findByEmail.
     find a person by email, protected by JWT authorization
     """
-    def findByEmail(%{email: email}, %{context: %{current_user: current_user}}) do
-      Logger.info "current_user: #{inspect(current_user)}"
-      case PersonHelper.get_user_by_email(email) do
+    def findByEmail(%{email: email}, %{context: %{current_person: current_person}}) do
+      Logger.info "current_person: #{inspect(current_person)}"
+      case PersonHelper.get_person_by_email(email) do
         nil -> {:error, "email #{email} not found"}
         person -> {:ok, person}
         _ -> {:error, "An error occured"}
@@ -77,12 +77,13 @@ defmodule Person.Resolvers do
     end
 
     @doc """
-    signin resolver, return the JWT token.
-    find a person by email, protected by JWT authorization
+    sign out resolver, return remove the JWT token from db
     """
     def signOut(_args,  %{context: %{current_person: current_person, token: _token}}) do
-      PersonHelper.revoke_token(current_person, nil)
-      {:ok, current_person}
+      person = current_person[:current_person]
+      PersonHelper.revoke_token(person, nil)
+      standard_reponse = %{status: "done", message: "sign out success"}
+      {:ok, standard_reponse}
     end
   
     def signOut(_args, _info) do

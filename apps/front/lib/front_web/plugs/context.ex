@@ -18,8 +18,8 @@ defmodule FrontWeb.Context do
   """
   def build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
-    {:ok, current_user} <- authorize(token) do
-      %{current_user: current_user}
+    {:ok, current_person} <- authorize(token) do
+      %{current_person: current_person, token: token}
     else
       _ -> %{}
     end
@@ -31,7 +31,7 @@ defmodule FrontWeb.Context do
       |> Repo.one()
       |> case do
           nil -> {:error, "Invalid authorization token"}
-          user -> {:ok, current_user: user}
+          user -> {:ok, current_person: user}
          end
     end
   end

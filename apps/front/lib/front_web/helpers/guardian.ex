@@ -19,7 +19,7 @@ defmodule FrontWeb.Guardian do
      # found in the `"sub"` key. In `above subject_for_token/2` we returned
      # the resource id so here we'll rely on that to look it up.
      Logger.info "resource_from_claims: #{inspect(claims)}"
-     person = claims["sub"] |> PersonHelper.get_user!
+     person = claims["sub"] |> PersonHelper.get_person!
      {:ok,  person}
     end
    end

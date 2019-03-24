@@ -3,8 +3,8 @@
 use Mix.Config
 
 config :notification,
- mailjet_api_key: System.get_env("DB_USER"),
- mailjet_api_secret: ""
+ mailjet_api_key: System.get_env("MAILJET_API_KEY"),
+ mailjet_api_secret: System.get_env("MAILJET_API_SECRET")
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
