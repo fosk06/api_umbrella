@@ -3,12 +3,8 @@ defmodule FrontWeb.Guardian do
     alias Person.Helpers.Person , as: PersonHelper
     use Guardian, otp_app: :front,
                             permissions: %{
-                              default: [:public_profile, :person_about_me],
-                              person_actions: %{
-                                notifications: 0b1,
-                                book: 0b100,
-                                music: 0b1000,
-                              }
+                              administrator: [:list_notifications,:send_notifications,:all_people_read,:all_people_write],
+                              customer: [:list_notifications]
                             }
     use Guardian.Permissions.Bitwise
     
@@ -30,13 +26,6 @@ defmodule FrontWeb.Guardian do
      Logger.info "resource_from_claims: #{inspect(claims)}"
      person = claims["sub"] |> PersonHelper.get_person!
      {:ok,  person}
-    end
-
-    def build_claims(claims, _resource, opts) do
-        claims =
-          claims
-          |> encode_permissions_into_claims!(Keyword.get(opts, :permissions))
-        {:ok, claims}
     end
 
    end

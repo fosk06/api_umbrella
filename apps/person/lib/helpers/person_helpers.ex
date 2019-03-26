@@ -89,6 +89,21 @@ defmodule Person.Helpers.Person do
     def delete_person(%Person{} = person) do
       Repo.delete(person)
     end
+
+    def get_permissions(person_type) do
+      case person_type do
+        {:administrator} ->
+          %{
+            queries: [:people],
+            mutations: [:create_person]
+          }
+        {:customer} ->
+          %{
+            queries: [:people],
+            mutations: [:create_person]
+          }
+      end
+    end
   
     @doc """
     Returns an `%Ecto.Changeset{}` for tracking person changes.

@@ -21,9 +21,16 @@ defmodule Person.Resolvers do
     end
   
     def signUp(_parent, %{input: input}, _resolution) do
-      changeset = PersonModel.changeset(%PersonModel{}, input)
+
+      customerPermissions= %{
+        queries: [:people],
+        mutations: [:create_person]
+      }
+      changeset = PersonModel.changeset(%PersonModel{
+        type: "customer",
+        permissions: customerPermissions
+      }, input)
       |> PersonModel.put_email_token()
-      |> PersonModel.put_person_type(:customer)
 
       case Repo.insert(changeset) do
         {:ok, %{id: id}} ->
@@ -69,9 +76,9 @@ defmodule Person.Resolvers do
 
     @doc """
     signin resolver, return the JWT token.
-    find a person by email, protected by JWT authorization
     """
     def signIn(_parent,%{input: %{email: email, password: password}}, _info) do
+      
       with {:ok, person} <- AuthHelper.login_with_email_pass(email, password),
            {:ok, jwt, _} <- FrontWeb.Guardian.encode_and_sign(person),
            {:ok, _} <- PersonHelper.store_token(person, jwt) do

@@ -11,6 +11,7 @@ defmodule DbConnector.Person do
       field :password, :string, virtual: true
       field :password_hash, :string
       field :type, :string
+      field :permissions, :map
       field :email_validated, :boolean
       field :age, :integer
       field(:token, :string)
@@ -20,8 +21,8 @@ defmodule DbConnector.Person do
 
     def changeset(person, params \\ %{}) do
         person
-        |> cast(params, [:first_name,:last_name, :email,:email_token, :email_validated, :password, :age])
-        |> validate_required([:first_name, :last_name, :password, :email])
+        |> cast(params, [:first_name,:last_name, :email,:email_token, :email_validated, :password, :age, :permissions])
+        |> validate_required([:first_name, :last_name, :password, :email, :type])
         |> validate_format(:email, ~r/@/)
         |> validate_inclusion(:age, 0..130)
         |> validate_length(:first_name, min: 3, max: 20)
@@ -50,15 +51,6 @@ defmodule DbConnector.Person do
       case changeset do
         %Ecto.Changeset{valid?: true} ->
           put_change(changeset, :email_token, uuid)
-        _ ->
-          changeset
-      end
-    end
-
-    def put_person_type(changeset, type) do
-      case changeset do
-        %Ecto.Changeset{valid?: true} ->
-          put_change(changeset, :type, Atom.to_charlist(type))
         _ ->
           changeset
       end

@@ -1,6 +1,6 @@
 defmodule DbConnector.Repo.Migrations.CreatePeople do
   use Ecto.Migration
-
+  
   def change do
     create table(:people) do
       add :first_name, :string, null: false
@@ -8,6 +8,7 @@ defmodule DbConnector.Repo.Migrations.CreatePeople do
       add :email, :string, unique: true, null: false
       add :email_token, :string
       add :type, :string
+      add :permissions, :map
       add :password_hash, :string
       add :email_validated, :boolean, default: false
       add :age, :integer
