@@ -111,8 +111,6 @@ defmodule Person.Helpers.Person do
     end
   
     def revoke_token(%Person{} = person, token) do
-      Logger.info "person: #{inspect(person)}"
-      Logger.info "token: #{inspect(token)}"
       person
       |> Person.store_token_changeset(%{token: token})
       |> Repo.update()

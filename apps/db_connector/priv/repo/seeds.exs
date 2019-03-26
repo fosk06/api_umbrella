@@ -9,6 +9,7 @@ for _ <- 1..5 do
     last_name: Faker.Name.last_name,
     email: Faker.Internet.safe_email(),
     email_token: UUID.uuid4(),
+    type: "customer",
     inserted_at: DateTime.utc_now,
     updated_at: DateTime.utc_now,
     password_hash: Bcrypt.hash_pwd_salt("password")

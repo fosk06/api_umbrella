@@ -1,7 +1,16 @@
 defmodule FrontWeb.Guardian do
     require Logger
-    use Guardian, otp_app: :front
     alias Person.Helpers.Person , as: PersonHelper
+    use Guardian, otp_app: :front,
+                            permissions: %{
+                              default: [:public_profile, :person_about_me],
+                              person_actions: %{
+                                notifications: 0b1,
+                                book: 0b100,
+                                music: 0b1000,
+                              }
+                            }
+    use Guardian.Permissions.Bitwise
     
     def subject_for_token(person, _claims) do
      # You can use any value for the subject of your token but
@@ -22,4 +31,12 @@ defmodule FrontWeb.Guardian do
      person = claims["sub"] |> PersonHelper.get_person!
      {:ok,  person}
     end
+
+    def build_claims(claims, _resource, opts) do
+        claims =
+          claims
+          |> encode_permissions_into_claims!(Keyword.get(opts, :permissions))
+        {:ok, claims}
+    end
+
    end

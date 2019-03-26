@@ -7,6 +7,7 @@ defmodule DbConnector.Repo.Migrations.CreatePeople do
       add :last_name, :string, null: false
       add :email, :string, unique: true, null: false
       add :email_token, :string
+      add :type, :string
       add :password_hash, :string
       add :email_validated, :boolean, default: false
       add :age, :integer

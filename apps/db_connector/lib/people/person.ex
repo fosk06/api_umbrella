@@ -10,6 +10,7 @@ defmodule DbConnector.Person do
       field :email_token, :string
       field :password, :string, virtual: true
       field :password_hash, :string
+      field :type, :string
       field :email_validated, :boolean
       field :age, :integer
       field(:token, :string)
@@ -49,6 +50,15 @@ defmodule DbConnector.Person do
       case changeset do
         %Ecto.Changeset{valid?: true} ->
           put_change(changeset, :email_token, uuid)
+        _ ->
+          changeset
+      end
+    end
+
+    def put_person_type(changeset, type) do
+      case changeset do
+        %Ecto.Changeset{valid?: true} ->
+          put_change(changeset, :type, Atom.to_charlist(type))
         _ ->
           changeset
       end

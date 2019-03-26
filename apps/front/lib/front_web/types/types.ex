@@ -15,6 +15,7 @@ defmodule FrontWeb.Schema.Types do
       field :email, :string
       field :email_token, :string
       field :password, :string
+      field :type, :string
       field :email_validated, :boolean
       field :age, :integer
       field :inserted_at, :string
