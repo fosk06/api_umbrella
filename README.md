@@ -22,11 +22,13 @@ There is only one query protected with JWT authentication for the moment, the "f
 
 First you must rename config/docker.dist.env to config/docker.env and set environment variables, like mailjet api key keys
 
+Then use the makefile to run the the project.
+Use "make help" to list the available options.
+You can run the project localy with elixir installed or with docker and docker-compose.
 
-**TODO: Add description**
-
-# api_umbrella
 
 
-### to create db run 
-first, run db with "make start_db" and then run  "mix ecto.create"
+
+### to create the database with docker and initiliase it
+first, run db with "make start_db" and then run "make reset_db".
+It will start the db, drop the database and recreate it, and insert some seed data. 
