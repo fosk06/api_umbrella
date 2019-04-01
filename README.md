@@ -5,7 +5,7 @@ This an "umbrella application", with a frontal phoenix application deserving the
 The resolvers are in others applications.  
 I tried to apply the "micro service" architecture design with an umbrella application.  
 
-Each queries / mutations will fall into a domain (see domain driven design), each domain will be translated into one or few micro services ( and here as applications on the umbrella).
+Each queries / mutations will fall into a domain (see domain driven design), each domain will be translated into one or few micro services ( and here as applications in the umbrella).
 
 In this playground, all the applications have a specific role :
 
@@ -25,7 +25,6 @@ First you must rename config/docker.dist.env to config/docker.env and set enviro
 Then use the makefile to run the the project.
 Use "make help" to list the available options.
 You can run the project localy with elixir installed or with docker and docker-compose.
-
 
 
 
