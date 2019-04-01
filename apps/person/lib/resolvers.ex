@@ -22,13 +22,8 @@ defmodule Person.Resolvers do
   
     def signUp(_parent, %{input: input}, _resolution) do
 
-      customerPermissions= %{
-        queries: [:people],
-        mutations: [:create_person]
-      }
       changeset = PersonModel.changeset(%PersonModel{
-        type: "customer",
-        permissions: customerPermissions
+        type: "customer"
       }, input)
       |> PersonModel.put_email_token()
 

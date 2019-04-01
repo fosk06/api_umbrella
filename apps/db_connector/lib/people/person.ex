@@ -21,7 +21,7 @@ defmodule DbConnector.Person do
 
     def changeset(person, params \\ %{}) do
         person
-        |> cast(params, [:first_name,:last_name, :email,:email_token, :email_validated, :password, :age, :permissions])
+        |> cast(params, [:first_name,:last_name, :email,:email_token,:type, :email_validated, :password, :age, :permissions])
         |> validate_required([:first_name, :last_name, :password, :email, :type])
         |> validate_format(:email, ~r/@/)
         |> validate_inclusion(:age, 0..130)
@@ -45,6 +45,31 @@ defmodule DbConnector.Person do
           changeset
       end
     end
+
+    # defp put_permissions(changeset) do
+    #   {_, type} = fetch_field(changeset, :type)
+    #   # Logger.info "type: #{inspect(type)}"
+    #   case changeset do
+    #     %Ecto.Changeset{valid?: true} ->
+    #       case type do
+    #         "administrator" ->
+    #           permissions =  %{
+    #             queries: [:people,:person_by_email],
+    #             mutations: [:create_person]
+    #           }
+    #           put_change(changeset, :permissions, permissions)
+    #         "customer" ->
+    #           permissions = %{
+    #             queries: [:person_by_email],
+    #             mutations: [:create_person]
+    #           }
+    #           put_change(changeset, :permissions, permissions)
+    #         _ -> changeset
+
+    #       end
+    #     _ -> changeset
+    #   end
+    # end
 
     def put_email_token(changeset) do
       uuid = UUID.uuid4()

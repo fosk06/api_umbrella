@@ -92,14 +92,14 @@ defmodule Person.Helpers.Person do
 
     def get_permissions(person_type) do
       case person_type do
-        {:administrator} ->
+        :administrator ->
           %{
-            queries: [:people],
+            queries: [:people,:person_by_email],
             mutations: [:create_person]
           }
-        {:customer} ->
+        :customer ->
           %{
-            queries: [:people],
+            queries: [:person_by_email],
             mutations: [:create_person]
           }
       end
