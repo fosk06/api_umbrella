@@ -23,7 +23,7 @@ defmodule Person.Resolvers do
     def signUp(_parent, %{input: input}, _resolution) do
 
       changeset = PersonModel.changeset(%PersonModel{
-        type: "customer"
+        role: 2
       }, input)
       |> PersonModel.put_email_token()
 
@@ -53,10 +53,10 @@ defmodule Person.Resolvers do
     find a person by email, protected by JWT authorization
     """
     def findByEmail(%{email: email}, %{context: %{current_person: current_person , token: token}}) do
-      Logger.info "token: #{inspect(token)}"
+      # Logger.info "token: #{inspect(token)}"
       case PersonHelper.get_person_by_email(email) do
-        nil -> {:error, "email #{email} not found"}
         person -> {:ok, person}
+        nil -> {:error, "email #{email} not found"}
         _ -> {:error, "An error occured"}
       end
     end

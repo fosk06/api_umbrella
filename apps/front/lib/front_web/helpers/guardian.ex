@@ -1,12 +1,7 @@
 defmodule FrontWeb.Guardian do
     require Logger
     alias Person.Helpers.Person , as: PersonHelper
-    use Guardian, otp_app: :front,
-                            permissions: %{
-                              administrator: [:list_notifications,:send_notifications,:all_people_read,:all_people_write],
-                              customer: [:list_notifications]
-                            }
-    use Guardian.Permissions.Bitwise
+    use Guardian, otp_app: :front
     
     def subject_for_token(person, _claims) do
      # You can use any value for the subject of your token but

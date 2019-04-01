@@ -2,6 +2,9 @@ defmodule DbConnector.Person do
     require Logger
     use Ecto.Schema
     import Ecto.Changeset
+    import EctoEnum
+    alias DbConnector.RoleEnum
+
 
     schema "people" do
       field :first_name, :string
@@ -10,8 +13,7 @@ defmodule DbConnector.Person do
       field :email_token, :string
       field :password, :string, virtual: true
       field :password_hash, :string
-      field :type, :string
-      field :permissions, :map
+      field :role, RoleEnum
       field :email_validated, :boolean
       field :age, :integer
       field(:token, :string)
@@ -21,8 +23,8 @@ defmodule DbConnector.Person do
 
     def changeset(person, params \\ %{}) do
         person
-        |> cast(params, [:first_name,:last_name, :email,:email_token,:type, :email_validated, :password, :age, :permissions])
-        |> validate_required([:first_name, :last_name, :password, :email, :type])
+        |> cast(params, [:first_name,:last_name, :email,:email_token,:role, :email_validated, :password, :age])
+        |> validate_required([:first_name, :last_name, :password, :email, :role])
         |> validate_format(:email, ~r/@/)
         |> validate_inclusion(:age, 0..130)
         |> validate_length(:first_name, min: 3, max: 20)
@@ -45,31 +47,6 @@ defmodule DbConnector.Person do
           changeset
       end
     end
-
-    # defp put_permissions(changeset) do
-    #   {_, type} = fetch_field(changeset, :type)
-    #   # Logger.info "type: #{inspect(type)}"
-    #   case changeset do
-    #     %Ecto.Changeset{valid?: true} ->
-    #       case type do
-    #         "administrator" ->
-    #           permissions =  %{
-    #             queries: [:people,:person_by_email],
-    #             mutations: [:create_person]
-    #           }
-    #           put_change(changeset, :permissions, permissions)
-    #         "customer" ->
-    #           permissions = %{
-    #             queries: [:person_by_email],
-    #             mutations: [:create_person]
-    #           }
-    #           put_change(changeset, :permissions, permissions)
-    #         _ -> changeset
-
-    #       end
-    #     _ -> changeset
-    #   end
-    # end
 
     def put_email_token(changeset) do
       uuid = UUID.uuid4()

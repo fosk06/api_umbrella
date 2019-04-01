@@ -27,6 +27,7 @@ defmodule DbConnector.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.0"},
+      {:ecto_enum, "~> 1.2"},
       {:postgrex, ">= 0.0.0"},
       {:uuid, "~> 1.1"},
       {:bcrypt_elixir, "~> 2.0"}
