@@ -1,4 +1,4 @@
-# ApiUmbrella
+# phoenix_graphql_playground
 
 This is a small playground to see the possibilities to make a GraphQL API with elixir based on phoenix and absinthe.
 This an "umbrella application", with a frontal phoenix application deserving the graphql schema and queries / mutations.
