@@ -4,7 +4,7 @@ defmodule Front.MixProject do
   def project do
     [
       app: :front,
-      version: "1.0.1",
+      version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
@@ -36,14 +36,12 @@ defmodule Front.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.1"},
+      {:phoenix, "~> 1.4.3"},
       {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_reload, "~> 1.2"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:basic_auth, "~> 2.2.2"},
       {:person, in_umbrella: true},
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 3.0"},

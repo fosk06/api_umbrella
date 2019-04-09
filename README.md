@@ -12,7 +12,6 @@ In this playground, all the applications have a specific role :
 - front : the phoenix app with absinthe, exposing the graphql API over HTTP
 - person : application to manage people(users), like sign in and sign out resolvers
 - db_connector: application that exposes the data model, with ecto(ORM)
-- notification: application to send notifications like emails and sms, with mailjet API
 
 The actual project implement a regular sign in, sign up and sign out process.
 It handles authentication with JWT, using hex module "Guardian".

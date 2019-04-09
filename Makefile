@@ -65,7 +65,7 @@ start: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and 
 	@echo "$(Green)Run local step ..........................................$(NC)"
 	@echo "$(Red) elixir, node.js and phoenix must be installed first !$(NC)"
 	@echo "$(Green) compile and run localy ........................ $(NC)"
-	mix do deps.get, deps.compile, compile, phx.digest, phx.server
+	mix do deps.get, deps.compile, compile, phx.server
 
 start_db: ## start db with docker
 	docker-compose up -d db

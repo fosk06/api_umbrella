@@ -8,8 +8,3 @@ config :front, FrontWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-config :front, authentication: [
-  username: "user",
-  password: "password",
-  realm:    "Development Realm"
-]

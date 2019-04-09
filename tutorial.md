@@ -58,7 +58,6 @@ You can compare it to micro service architecture with limitations.
 In the playground we will create an umbrella application with four applications :
 - db_connector wich will contain the ORM/Data models of the system
 - front, which will run the phoenix HTTP application with Absinthe desserving the GraphQL schema
-- notification, which will contain the GraphQL resolvers to hande notifications, like sending email and SMS( Work in progress )
 - person, will manage regular "users", handle sign in/sign up proccess and role base access management with JWT tokens.
 
 To start with this, we will use the great tools packaged with elixir, called "Mix".
@@ -82,4 +81,36 @@ Firt lets create the umbrella application itself : mix new phoenix_graphql_playg
 this will generate the skeleton of the umbrella application, with a folder called "apps". 
 this folder will contains our four applications. 
 After this, move in the apps folder and generate the first application with the phoenix task :
+cd ./phoenix_graphql_playground/apps
+mix phx.new front --no-ecto --no-webpack --no-html
 
+The option --no-ecto tells phoenix to not configure ecto (the ORM), and --no-webpack is usefull when you don't want to generates the assets with wepack. We are buildling a API with no rendering at all,so it's a good choice.  
+
+then generate the others applications :
+mix new db_connector --sup
+mix new person --sup
+
+move to the config folder at the root of the project, and create a docker.env file.
+We will set our environments variables inside it.
+
+copy this content inside
+HOSTNAME=localhost
+SECRET_KEY_BASE="u1QXlca4XEZKb1o3HL/aUlznI1qstCNAQ6yme/lFbFIs0Iqiq/annZ+Ty8JyUCDc"
+DATABASE_HOST=api_umbrella
+DATABASE_USER=postgres
+DATABASE_PASS=postgres
+DATABASE_NAME=api_umbrella
+PORT=4000
+LANG=en_US.UTF-8
+REPLACE_OS_VARS=true
+ERLANG_COOKIE=myapp
+DOCKER_REGISTRY=
+DOCKER_USERNAME=
+DOCKER_PASSWORD=
+
+Then set the values you want.
+Then download the docker files and the Makefile :
+
+wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/fosk06/phoenix_graphql_playground/master/docker-compose.yml
+wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/fosk06/phoenix_graphql_playground/master/Dockerfile
+wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/fosk06/phoenix_graphql_playground/master/Makefile

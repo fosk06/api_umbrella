@@ -11,21 +11,11 @@ use Mix.Config
 # before starting your production server.
 config :front, FrontWeb.Endpoint,
   http: [:inet6, port: System.get_env("PORT") || 4000],
-  # url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  url: [host: "localhost", port: {:system, "PORT"}],
-  server: true,
-  root: ".",
-  version: Application.spec(:front, :vsn)
+  url: [host: "example.com", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
-# config :logger, level: :info
-
-config :front, authentication: [
-  username: {:system, "BASIC_AUTH_USERNAME"},
-  password: {:system, "BASIC_AUTH_PASSWORD"},
-  realm:    {:system, "BASIC_AUTH_REALM"}
-]
+config :logger, level: :info
 
 # ## SSL Support
 #
