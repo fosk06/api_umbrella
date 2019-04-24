@@ -55,7 +55,7 @@ Repo.insert!(%Permission{
 Repo.insert!(%Permission{
   operation_type: 0,
   role: 2,
-  value: "personByEmail"
+  value: "person_by_email"
 })
 
 # anonymous queries / mutations

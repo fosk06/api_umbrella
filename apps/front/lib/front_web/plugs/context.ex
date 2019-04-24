@@ -24,14 +24,14 @@ defmodule FrontWeb.Context do
       # Logger.info "perms: #{inspect(perms)}"
       %{current_person: person, token: token, permissions: perms, role: person.role}
     else
-      _ -> %{role: "anonymous"}
+      _ -> %{role: "anonymous", permissions: nil}
     end
   end
   
     defp get_permissions(role) do
       Permission
       |> where(role: ^role)
-      |> Repo.one()
+      |> Repo.all()
     end
 
     defp authorize(token) do

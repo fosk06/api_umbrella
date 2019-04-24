@@ -62,14 +62,6 @@ defmodule Person.Resolvers do
     end
 
     @doc """
-    findByEmail default implementation
-    find a person by email, protected by JWT authorization
-    """
-    def findByEmail(_args, _info) do
-      {:error, "Not Authorized"}
-    end
-
-    @doc """
     signin resolver, return the JWT token.
     """
     def signIn(_parent,%{input: %{email: email, password: password}}, _info) do
