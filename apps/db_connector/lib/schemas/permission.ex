@@ -1,11 +1,11 @@
-defmodule DbConnector.Role do
+defmodule DbConnector.Permission do
     require Logger
     use Ecto.Schema
     import Ecto.Changeset
     import EctoEnum
     alias DbConnector.{RoleEnum, OperationEnum}
 
-    schema "people" do
+    schema "permission" do
       field :operation_type, OperationEnum
       field :role, RoleEnum
       field :value, :string

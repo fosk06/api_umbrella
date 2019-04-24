@@ -1,5 +1,5 @@
 alias DbConnector.Repo
-alias DbConnector.Person
+alias DbConnector.{Person,Permission}
 
 # Create 5 seed users
 customerPermissions= %{
@@ -46,3 +46,9 @@ for _ <- 1..2 do
     password_hash: Bcrypt.hash_pwd_salt("anonymous")
   })
 end
+
+Repo.insert!(%Permission{
+  operation_type: 0,
+  role: 2,
+  value: "people"
+})

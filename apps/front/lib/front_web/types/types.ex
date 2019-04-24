@@ -21,6 +21,7 @@ defmodule FrontWeb.Schema.Types do
       field :inserted_at, :string
       field :updated_at, :string
       field :token, :string
+      field :role, :integer
     end
 
     @desc "An Email"

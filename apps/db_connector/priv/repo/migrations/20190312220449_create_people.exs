@@ -15,7 +15,13 @@ defmodule DbConnector.Repo.Migrations.CreatePeople do
       add :age, :integer
       add :token, :text
       add :role, :integer
+      timestamps(type: :utc_datetime_usec)
+    end
 
+    create table(:permission) do
+      add :operation_type, :integer
+      add :role, :integer
+      add :value, :string, null: false
       timestamps(type: :utc_datetime_usec)
     end
 
