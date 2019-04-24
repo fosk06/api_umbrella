@@ -52,3 +52,29 @@ Repo.insert!(%Permission{
   role: 2,
   value: "people"
 })
+Repo.insert!(%Permission{
+  operation_type: 0,
+  role: 2,
+  value: "personByEmail"
+})
+
+# anonymous queries / mutations
+
+## queries
+Repo.insert!(%Permission{
+  operation_type: 0,
+  role: 0,
+  value: "signIn"
+})
+
+## mutations
+Repo.insert!(%Permission{
+  operation_type: 1,
+  role: 0,
+  value: "signUp"
+})
+Repo.insert!(%Permission{
+  operation_type: 1,
+  role: 0,
+  value: "signOut"
+})

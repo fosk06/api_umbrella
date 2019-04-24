@@ -9,7 +9,7 @@ defmodule FrontWeb.Guardian do
      # how it being used on `user_from_claims/1` function.
      # A unique `id` is a good subject, a non-unique email address
      # is a poor subject.
-     Logger.info "subject_for_token person: #{inspect(person)}"
+     # Logger.info "subject_for_token person: #{inspect(person)}"
      sub = to_string(person.id)
      {:ok, sub}
     end

@@ -16,7 +16,7 @@ defmodule Person.Resolvers do
     """
     def getAllPeople(_parent, _args, _resolution) do
       people =  PersonModel |> Repo.all
-      Logger.info "person: #{inspect(people)}"
+      # Logger.info "person: #{inspect(people)}"
       {:ok, people}
     end
   
@@ -29,7 +29,7 @@ defmodule Person.Resolvers do
 
       case Repo.insert(changeset) do
         {:ok, %{id: id}} ->
-          Logger.info "id person: #{inspect(id)}"
+          # Logger.info "id person: #{inspect(id)}"
           standard_reponse = %{status: "done", message: "sign up success, id : #{id}"}
           {:ok, standard_reponse}
         {:error, changeset} ->
@@ -53,7 +53,7 @@ defmodule Person.Resolvers do
     find a person by email, protected by JWT authorization
     """
     def findByEmail(%{email: email}, %{context: %{current_person: current_person , token: token}}) do
-      # Logger.info "token: #{inspect(token)}"
+      # Logger.info "current_person!!: #{inspect(current_person)}"
       case PersonHelper.get_person_by_email(email) do
         person -> {:ok, person}
         nil -> {:error, "email #{email} not found"}
