@@ -1,0 +1,21 @@
+query login($input: SignInInput!) {
+  signIn(input: $input) {
+    token
+  }
+}
+{"input": {"email": "adrian2037@example.net", "password": "customer"}}
+
+query listUser {
+  people {email, password, role}
+}
+
+query findByMail($email: String!) {
+  personByEmail(email: $email) {
+    email
+    firstName
+    lastName
+    role
+  }
+}
+{"email": "adrian2037@example.net"}
+{"Authorization": "Bearer yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJGcm9udFdlYiIsImV4cCI6MTU1ODcwNDA4NSwiaWF0IjoxNTU2MTEyMDg1LCJpc3MiOiJGcm9udFdlYiIsImp0aSI6ImIwNTQ5ODU4LWY4M2YtNGExNi1hYjcxLTRhODIyMDBmZTQwZSIsIm5iZiI6MTU1NjExMjA4NCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.Tz_BTB3pzu6ah5cDGNY4dEJCyQRmkLGrvHIywzdonFQ29gCWfybs85ALnbR9slAaPs6Elj44SmJrdwc1f2o4DA"}

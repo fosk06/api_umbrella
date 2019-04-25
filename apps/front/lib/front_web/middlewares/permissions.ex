@@ -8,7 +8,7 @@ defmodule FrontWeb.Middlewares.Permissions do
 
       case check_is_authorized(permissions, name) do
         true -> resolution.errors
-        false -> ["not authorized" | resolution.errors]
+        false -> resolution.errors ++ ["not authorized"]
       end
       |> case do
         errors when length(errors) > 0 -> 
@@ -19,6 +19,7 @@ defmodule FrontWeb.Middlewares.Permissions do
     end
   
     defp check_is_authorized(permissions, name) do
+
       case is_nil(permissions) do
         true -> false
         false -> 

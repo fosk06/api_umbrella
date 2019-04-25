@@ -21,10 +21,11 @@ defmodule FrontWeb.Context do
     {:ok, current_person} <- authorize(token) do
       person = current_person[:current_person]
       perms = get_permissions(person.role)
-      # Logger.info "perms: #{inspect(perms)}"
       %{current_person: person, token: token, permissions: perms, role: person.role}
     else
-      _ -> %{role: "anonymous", permissions: nil}
+      _ -> 
+        perms = get_permissions("anonymous")
+        %{role: "anonymous", permissions: perms}
     end
   end
   
