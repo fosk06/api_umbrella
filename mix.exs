@@ -18,7 +18,9 @@ defmodule ApiUmbrella.MixProject do
   # Run "mix help deps" for examples and options.
   defp deps do
     [
-      {:distillery, "~> 2.0"}
+      {:distillery, "~> 2.0"},
+      {:earmark, "~> 1.2", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev}
     ]
   end
 end

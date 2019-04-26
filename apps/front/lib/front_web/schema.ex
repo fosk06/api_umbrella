@@ -13,8 +13,8 @@ defmodule FrontWeb.Schema do
   
       @desc "Get a person by email"
       field :person_by_email, :person do
-        middleware FrontWeb.Middlewares.Permissions
         middleware FrontWeb.Middlewares.Authentication
+        middleware FrontWeb.Middlewares.Permissions
         arg :email, non_null(:string)
         resolve &Person.Resolvers.findByEmail/2
       end
