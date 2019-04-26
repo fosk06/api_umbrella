@@ -1,5 +1,6 @@
 defmodule FrontWeb.Router do
   @moduledoc false
+  
   use FrontWeb, :router
 
   pipeline :api do

@@ -1,5 +1,6 @@
 defmodule FrontWeb.Schema.Inputs do
     @moduledoc false
+    
     use Absinthe.Schema.Notation
     
     @desc "the sign up input"

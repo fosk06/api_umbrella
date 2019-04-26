@@ -1,5 +1,6 @@
 defmodule DbConnector.Repo.Migrations.CreatePeople do
   @moduledoc false
+  
   use Ecto.Migration
   import EctoEnum
 

@@ -1,5 +1,6 @@
 defmodule DbConnectorTest do
   @moduledoc false
+  
   use ExUnit.Case
   doctest DbConnector
 

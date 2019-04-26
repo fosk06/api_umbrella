@@ -1,5 +1,6 @@
 defmodule FrontWeb.Guardian do
     @moduledoc false
+    
     require Logger
     alias Person.Helpers.Person , as: PersonHelper
     use Guardian, otp_app: :front

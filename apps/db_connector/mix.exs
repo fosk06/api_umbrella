@@ -1,5 +1,6 @@
 defmodule DbConnector.MixProject do
   @moduledoc false
+  
   use Mix.Project
 
   def project do
