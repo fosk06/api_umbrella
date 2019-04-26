@@ -1,4 +1,5 @@
 defmodule FrontWeb.Middlewares.Permissions do
+    @moduledoc false
     require Logger
 
     @behaviour Absinthe.Middleware

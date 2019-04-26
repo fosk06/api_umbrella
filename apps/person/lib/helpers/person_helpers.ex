@@ -1,6 +1,6 @@
 defmodule Person.Helpers.Person do
     @moduledoc """
-    The boundary for the Accounts system.
+    A list of functions to manipulate People.
     """
     require Logger
     import Ecto.Query, warn: false

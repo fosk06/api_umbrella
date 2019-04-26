@@ -1,4 +1,5 @@
 defmodule PersonTest do
+  @moduledoc false
   use ExUnit.Case
   doctest Person
 

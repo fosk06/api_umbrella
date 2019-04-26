@@ -1,4 +1,5 @@
 defmodule FrontWeb.Context do
+    @moduledoc false
     @behaviour Plug
 
     require Logger

@@ -1,5 +1,5 @@
 defmodule FrontWeb.Schema do
-
+    @moduledoc false
     use Absinthe.Schema
     import_types FrontWeb.Schema.Types
     import_types FrontWeb.Schema.Inputs

@@ -1,4 +1,5 @@
 defmodule FrontWeb.Schema.Types do
+    @moduledoc false
     use Absinthe.Schema.Notation
     
     @desc "An item"

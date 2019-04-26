@@ -1,4 +1,5 @@
 defmodule DbConnector.Permission do
+    @moduledoc false
     require Logger
     use Ecto.Schema
     import Ecto.Changeset

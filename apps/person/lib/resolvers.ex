@@ -1,4 +1,5 @@
 defmodule Person.Resolvers do
+    @moduledoc false
     require Logger
     alias DbConnector.Person, as: PersonModel
     alias DbConnector.Repo

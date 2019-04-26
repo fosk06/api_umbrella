@@ -1,4 +1,5 @@
 defmodule FrontWeb.ErrorView do
+  @moduledoc false
   use FrontWeb, :view
 
   # If you want to customize a particular status code
