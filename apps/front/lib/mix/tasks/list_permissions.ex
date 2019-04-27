@@ -4,11 +4,10 @@ defmodule Mix.Tasks.Permissions.List do
     alias DbConnector.{Repo, Permission}
     import Ecto.Query, only: [where: 2, order_by: 2]
 
-    @shortdoc "Display the permissions of the DB"
+    @shortdoc "Display the permissions of the DB, can be filtered"
     def run(args) do
       Mix.Task.run "app.start"
-      permissions = with 
-      [role | _ ] when is_binary(role) <- args ,
+      permissions = with [role | _ ] when is_binary(role) <- args ,
       true <-String.contains?(role, ["customer", "anonymous", "administrator"])
       do
         Permission|> where(role: ^role) |> Repo.all()
@@ -17,7 +16,7 @@ defmodule Mix.Tasks.Permissions.List do
       end
 
       Enum.map(permissions, fn(p) -> 
-        Logger.info "\"#{p.operation_name}\" #{p.operation_type} allowed for \"#{p.role}\" role " 
+        IO.puts "\"#{p.operation_name}\" #{p.operation_type} allowed for \"#{p.role}\" role " 
       end)
       # Logger.info "permissions: #{inspect(permissions)}"
 
