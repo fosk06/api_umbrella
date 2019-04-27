@@ -7,8 +7,9 @@ defmodule Mix.Tasks.Permissions.List do
     @shortdoc "Display the permissions of the DB"
     def run(args) do
       Mix.Task.run "app.start"
-      permissions = with [role | _ ] when is_binary(role) <- args ,
-                    true <-String.contains?(role, ["customer", "anonymous", "administrator"])
+      permissions = with 
+      [role | _ ] when is_binary(role) <- args ,
+      true <-String.contains?(role, ["customer", "anonymous", "administrator"])
       do
         Permission|> where(role: ^role) |> Repo.all()
       else
