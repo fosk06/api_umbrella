@@ -50,12 +50,12 @@ end
 Repo.insert!(%Permission{
   operation_type: 0,
   role: 2,
-  value: "people"
+  operation_name: "people"
 })
 Repo.insert!(%Permission{
   operation_type: 0,
   role: 2,
-  value: "person_by_email"
+  operation_name: "person_by_email"
 })
 
 # anonymous queries / mutations
@@ -64,17 +64,17 @@ Repo.insert!(%Permission{
 Repo.insert!(%Permission{
   operation_type: 0,
   role: 0,
-  value: "signIn"
+  operation_name: "signIn"
 })
 
 ## mutations
 Repo.insert!(%Permission{
   operation_type: 1,
   role: 0,
-  value: "signUp"
+  operation_name: "signUp"
 })
 Repo.insert!(%Permission{
   operation_type: 1,
   role: 0,
-  value: "signOut"
+  operation_name: "signOut"
 })

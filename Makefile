@@ -70,11 +70,14 @@ start: ## Get deps, compile and run locally with mix tasks, Elixir, node.js and 
 start_db: ## start db with docker
 	docker-compose up -d db
 	
-generate_doc: ## generate docs
+documentation: ## generate docs
 	mix docs
 
 start_interactive: ## start with interative terminal(iex)
 	iex -S mix
+
+list_permissions: ## list permissions
+	mix do compile, permissions.list
 	
 reset_db: ## recreate database with tables and test data, use on development ONLY
 	docker-compose up -d db
